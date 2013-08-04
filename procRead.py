@@ -9,11 +9,25 @@ class power():
     bat_data = self.battery.read()
     gen_data = self.general.read()
     print bat_data, gen_data
-    return bat_data, gen_data
+    return self.__parse(bat_data), self.__parse(gen_data)
 
   def release(self):
     self.battery.close()
     self.general.close()
 
-  def __parse(self, battery, info):
-    pass
+  def __parse(self, data):
+    out = {}
+    print data
+    for line in data.split("\n"):
+      if line in ["\n", ""]: 
+        print line
+        pass
+      else:
+        print line
+        unpacked = line.split(":")
+        print unpacked
+        key = unpacked[0].strip(" ")
+        val = unpacked[1].strip(" ")
+        out[key]=val
+    return out
+

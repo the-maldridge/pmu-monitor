@@ -5,7 +5,7 @@ class power():
 
   def printdata(self):
     data = self.__update()
-    print data["AC Power"], data["time rem."]
+    print data["AC Power"], float(data["time rem."])/3600
 
   def __update(self):
     batfile = open(self.battery)
@@ -14,9 +14,7 @@ class power():
     gen_data = genfile.read()
     batfile.close()
     genfile.close()
-    out = {}
-    out =  self.__parse(bat_data).items() + self.__parse(gen_data).items()
-    return out
+    return dict(self.__parse(bat_data).items() + self.__parse(gen_data).items()) 
 
   def __parse(self, data):
     out = {}

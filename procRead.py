@@ -4,10 +4,10 @@ class power():
     self.general=general
 
   def printdata(self):
-    data = self.__update()
+    data = self.update()
     print data["AC Power"], float(data["time rem."])/3600
 
-  def __update(self):
+  def update(self):
     batfile = open(self.battery)
     genfile = open(self.general)
     bat_data = batfile.read()
